@@ -26,6 +26,13 @@ _For more examples and usage, please refer to the [Wiki][wiki]._
 
 Ray Gan – ganzhiyi1994@gmail.com
 
+## Known Issue
+
+Error when entity owner type is Organization.
+
+Export solution button is in developing, can not work for now.
+
+
 ## Contributing
 I am re-writting this plugin becasue the code is mess, so you can consider wait for the new release code or just start your own work.
 
