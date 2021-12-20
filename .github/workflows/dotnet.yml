@@ -17,8 +17,8 @@ jobs:
       with:
         nuget-api-key: ${{ secrets.NuGetAPIKey }}
         nuget-version: '5.x'
-    - run: nuget restore SecurityPrivilegeCopy.sln
+    - run: nuget restore EntityPrivilegeCopy.sln
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
     - name: Build app for release
-      run: msbuild SecurityPrivilegeCopy\EntityPrivilegeCopy.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: msbuild EntityPrivilegeCopy\EntityPrivilegeCopy.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
