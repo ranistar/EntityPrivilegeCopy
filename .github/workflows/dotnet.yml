@@ -16,4 +16,4 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
     - name: Build app for release
-      run: msbuild src\YourProjectFile.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: msbuild SecurityPrivilegeCopy\SecurityPrivilegeCopy\EntityPrivilegeCopy.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
