@@ -8,8 +8,8 @@
     <ProjectGuid>{5942E343-1EE3-4A70-BE9B-55232DC521E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SecurityPrivilegeCopy</RootNamespace>
-    <AssemblyName>SecurityPrivilegeCopy</AssemblyName>
+    <RootNamespace>EntityPrivilegeCopy</RootNamespace>
+    <AssemblyName>EntityPrivilegeCopy</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
