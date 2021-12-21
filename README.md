@@ -4,7 +4,11 @@
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url] -->
 
-![](header.png)
+![](https://github.com/ranistar/EntityPrivilegeCopy/blob/e665b9589009d8690f6181ae6df5a2dedcf3d7a1/header01.png)
+***
+***
+![](https://github.com/ranistar/EntityPrivilegeCopy/blob/e665b9589009d8690f6181ae6df5a2dedcf3d7a1/Blank%20Main%20Form.png)
+
 
 ## Usage example
 > Preparation:
