@@ -13,6 +13,7 @@ namespace EntityPrivilegeCopy
 {
     public class CommonHelper
     {
+
         private IOrganizationService service;
         public CommonHelper(IOrganizationService organizationService)
         {
