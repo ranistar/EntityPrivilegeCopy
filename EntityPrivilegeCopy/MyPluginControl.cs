@@ -215,6 +215,10 @@ namespace EntityPrivilegeCopy
                         var privilegeDepth = commonHelper.MappingPrivilegeMaskToPrivilegeDepth(privilegeMask);
                         foreach (var targetEntityPrivilegeMetadata in targetEntityPrivilegeMetadatas)
                         {
+                            if (targetEntityPrivilegeMetadata.EntityMetadata.OwnershipType.Value == OwnershipTypes.OrganizationOwned)
+                            {
+                                privilegeDepth = 3;
+                            }
                             if (targetEntityPrivilegeMetadata.EntityMetadata.Privileges.Any(x => x.PrivilegeType == privilegeType))
                             {
                                 var targetPrivilegeMetadata = targetEntityPrivilegeMetadata.EntityMetadata.Privileges.First(x => x.PrivilegeType == privilegeType);
