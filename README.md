@@ -44,7 +44,7 @@ Add a process bar during action.
 Cache metadata for better perfomance.
 
 ## Contributing
-I am re-writting this plugin becasue the code is mess, so you can consider wait for the new release code or just start your own work.
+I am re-writting this plugin becasue the code is mess, so you can consider wait for the new release code.
 
 <!-- Markdown link & img dfn's -->
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
