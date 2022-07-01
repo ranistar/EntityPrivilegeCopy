@@ -36,8 +36,6 @@ Ray Gan – ganzhiyi1994@gmail.com
 
 ## Known Issue
 
-Error when entity owner type is Organization.
-
 Export solution button is in developing, can not work for now.
 
 ## TODO List
