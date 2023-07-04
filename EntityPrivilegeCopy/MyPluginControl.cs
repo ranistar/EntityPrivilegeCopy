@@ -16,27 +16,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Args;
+using XrmToolBox.Extensibility.Interfaces;
 
 namespace EntityPrivilegeCopy
 {
-    public partial class MyPluginControl : PluginControlBase
+    public partial class MyPluginControl : PluginControlBase, IGitHubPlugin, IHelpPlugin
     {
         #region IGitHubPlugin implementation
+        public string RepositoryName
+        {
+            get { return "EntityPrivilegeCopy"; }
+        }
 
-        public string RepositoryName => "EntityPrivilegeCopy";
-
-        public string UserName => "ranistar";
-
+        public string UserName
+        {
+            get { return "ranistar"; }
+        }
         #endregion IGitHubPlugin implementation
 
         #region IHelpPlugin implementation
-
-        //public string HelpUrl => "https://github.com/ranistar/EntityPrivilegeCopy.git";
+        public string HelpUrl
+        {
+            get { return "https://github.com/ranistar/EntityPrivilegeCopy/blob/main/README.md#entityprivilegecopy"; }
+        }
 
         #endregion IHelpPlugin implementation
         public event EventHandler SendMessageToStatusBar;
-
-        private Settings mySettings;
 
         private CommonHelper commonHelper;
         private EntityMetadata[] EntityDifinitions;
@@ -50,20 +55,6 @@ namespace EntityPrivilegeCopy
 
         private void MyPluginControl_Load(object sender, EventArgs e)
         {
-            ShowInfoNotification("This is a notification that can lead to XrmToolBox repository", new Uri("https://github.com/MscrmTools/XrmToolBox"));
-
-            // Loads or creates the settings for the plugin
-            if (!SettingsManager.Instance.TryLoad(GetType(), out mySettings))
-            {
-                mySettings = new Settings();
-
-                LogWarning("Settings not found => a new settings file has been created!");
-            }
-            else
-            {
-                LogInfo("Settings found and loaded");
-            }
-
             commonHelper = new CommonHelper(Service);
         }
 
@@ -79,8 +70,7 @@ namespace EntityPrivilegeCopy
         /// <param name="e"></param>
         private void MyPluginControl_OnCloseTool(object sender, EventArgs e)
         {
-            // Before leaving, save the settings
-            SettingsManager.Instance.Save(GetType(), mySettings);
+
         }
 
         /// <summary>
@@ -89,12 +79,6 @@ namespace EntityPrivilegeCopy
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter)
         {
             base.UpdateConnection(newService, detail, actionName, parameter);
-
-            if (mySettings != null && detail != null)
-            {
-                mySettings.LastUsedOrganizationWebappUrl = detail.WebApplicationUrl;
-                LogInfo("Connection has changed to: {0}", detail.WebApplicationUrl);
-            }
         }
 
         #region Control Data Bind and Refresh
@@ -146,7 +130,10 @@ namespace EntityPrivilegeCopy
 
         private void LoadDataBtn_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text += $"\r\nLoad start.";
+            WorkAsync(new WorkAsyncInfo
+            {
+
+            });
             EntityDifinitions = commonHelper.GetEntityDefinitions();
             Solutions = commonHelper.GetSolutions();
 
@@ -157,13 +144,10 @@ namespace EntityPrivilegeCopy
             SolutionCmbBind();
             TargetEntityClbBind();
             PrivilegeTypeClbBind();
-            this.textBox1.Text += $"\r\nLoad end.";
         }
 
         private void excuteBtn_Click(object sender, EventArgs e)
         {
-            // only one of entity list can select more than one item
-
             var sourceEntityData = this.sourceEntityCmb.SelectedItem as ControlDataItemModel;
             var targetEntityNames = CheckedTargetEntutyList.Select(x => x.LogicalName).ToList();
             var copyPrivilegeTypes = new List<int>();
@@ -177,7 +161,7 @@ namespace EntityPrivilegeCopy
                 var rolesData = commonHelper.GetSecurityRolesInSolution(new Guid(solutionData.Id));
                 if (rolesData.Entities.Count == 0)
                 {
-                    MessageBox.Show($"Found {rolesData.Entities.Count} role(s) in solution {solutionData.DisplayName}");
+                    MessageBox.Show($"Found {rolesData.Entities.Count} role(s) in solution {solutionData.DisplayName}. Please add target role to solution first.");
                     return;
                 }
                 Copy(sourceEntityData.LogicalName, targetEntityNames, rolesData, copyPrivilegeTypes, false);
@@ -223,7 +207,6 @@ namespace EntityPrivilegeCopy
                             {
                                 var targetPrivilegeMetadata = targetEntityPrivilegeMetadata.EntityMetadata.Privileges.First(x => x.PrivilegeType == privilegeType);
                                 addPrivileges.Add(new RolePrivilege(privilegeDepth, targetPrivilegeMetadata.PrivilegeId));
-                                this.textBox1.Text += ($"\r\nRole name:{role.GetAttributeValue<string>("name")}, privilegeType: {privilegeType}, privilegeId: {targetPrivilegeMetadata.PrivilegeId}, depth: {commonHelper.MappingPrivilegeDepthToString(privilegeDepth)}");
                             }
                         }
                     }
@@ -266,7 +249,7 @@ namespace EntityPrivilegeCopy
         private void previewBtn_Click(object sender, EventArgs e)
         {
             var sourceEntityData = this.sourceEntityCmb.SelectedItem as ControlDataItemModel;
-            var targetEntityNames = CheckedTargetEntutyList.Select(x=>x.LogicalName).ToList();
+            var targetEntityNames = CheckedTargetEntutyList.Select(x => x.LogicalName).ToList();
             foreach (var checkedItem in this.targetEntityListClb.CheckedItems)
             {
                 targetEntityNames.Add((checkedItem as ControlDataItemModel).LogicalName);
@@ -298,7 +281,7 @@ namespace EntityPrivilegeCopy
         {
             var selectedItem = (sender as CheckedListBox).Items[e.Index] as ControlDataItemModel;
             if (e.NewValue == CheckState.Checked)
-            {                
+            {
                 if (!CheckedTargetEntutyList.Contains(selectedItem))
                 {
                     CheckedTargetEntutyList.Add(selectedItem);
