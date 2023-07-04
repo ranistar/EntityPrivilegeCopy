@@ -146,7 +146,7 @@ namespace EntityPrivilegeCopy
             PrivilegeTypeClbBind();
         }
 
-        private void excuteBtn_Click(object sender, EventArgs e)
+        private void ExcuteBtn_Click(object sender, EventArgs e)
         {
             var sourceEntityData = this.sourceEntityCmb.SelectedItem as ControlDataItemModel;
             var targetEntityNames = CheckedTargetEntutyList.Select(x => x.LogicalName).ToList();
@@ -224,7 +224,7 @@ namespace EntityPrivilegeCopy
         }
 
         // TODO filter item in Target entity ListCheckBox
-        private void filterTargetEntityTxb_TextChanged(object sender, EventArgs e)
+        private void FilterTargetEntityTxb_TextChanged(object sender, EventArgs e)
         {
             var txt = this.filterTargetEntityTxb.Text;
             if (string.IsNullOrEmpty(txt))
@@ -246,38 +246,12 @@ namespace EntityPrivilegeCopy
             }
         }
 
-        private void previewBtn_Click(object sender, EventArgs e)
-        {
-            var sourceEntityData = this.sourceEntityCmb.SelectedItem as ControlDataItemModel;
-            var targetEntityNames = CheckedTargetEntutyList.Select(x => x.LogicalName).ToList();
-            foreach (var checkedItem in this.targetEntityListClb.CheckedItems)
-            {
-                targetEntityNames.Add((checkedItem as ControlDataItemModel).LogicalName);
-            }
-            var copyPrivilegeTypes = new List<int>();
-            foreach (var checkedItem in this.privilegeTypeClb.CheckedItems)
-            {
-                copyPrivilegeTypes.Add(int.Parse((checkedItem as ControlDataItemModel).Id));
-            }
-            var solutionData = this.solutionCmb.SelectedItem as ControlDataItemModel;
-            if (!string.IsNullOrEmpty(solutionData?.Id))
-            {
-                var rolesData = commonHelper.GetSecurityRolesInSolution(new Guid(solutionData.Id));
-                if (rolesData.Entities.Count == 0)
-                {
-                    MessageBox.Show($"Found {rolesData.Entities.Count} role(s) in solution {solutionData.DisplayName}");
-                    return;
-                }
-                Copy(sourceEntityData.LogicalName, targetEntityNames, rolesData, copyPrivilegeTypes);
-            }
-        }
-
-        private void exportSolutionBtn_Click(object sender, EventArgs e)
+        private void ExportSolutionBtn_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void targetEntityListClb_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void TargetEntityListClb_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             var selectedItem = (sender as CheckedListBox).Items[e.Index] as ControlDataItemModel;
             if (e.NewValue == CheckState.Checked)
