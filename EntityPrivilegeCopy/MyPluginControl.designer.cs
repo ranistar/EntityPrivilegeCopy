@@ -40,13 +40,17 @@ namespace EntityPrivilegeCopy
             this.targetEntityListClb = new System.Windows.Forms.CheckedListBox();
             this.sourceEntityCmb = new System.Windows.Forms.ComboBox();
             this.solutionCmb = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.filterTargetEntityTxb = new System.Windows.Forms.TextBox();
             this.privilegeTypeClb = new System.Windows.Forms.CheckedListBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.toolStripMenu.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -127,7 +131,7 @@ namespace EntityPrivilegeCopy
             // 
             this.targetEntityListClb.CheckOnClick = true;
             this.targetEntityListClb.FormattingEnabled = true;
-            this.targetEntityListClb.Location = new System.Drawing.Point(15, 222);
+            this.targetEntityListClb.Location = new System.Drawing.Point(7, 69);
             this.targetEntityListClb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.targetEntityListClb.Name = "targetEntityListClb";
             this.targetEntityListClb.Size = new System.Drawing.Size(653, 312);
@@ -139,7 +143,7 @@ namespace EntityPrivilegeCopy
             this.sourceEntityCmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.sourceEntityCmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.sourceEntityCmb.FormattingEnabled = true;
-            this.sourceEntityCmb.Location = new System.Drawing.Point(15, 84);
+            this.sourceEntityCmb.Location = new System.Drawing.Point(7, 29);
             this.sourceEntityCmb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.sourceEntityCmb.Name = "sourceEntityCmb";
             this.sourceEntityCmb.Size = new System.Drawing.Size(655, 33);
@@ -148,42 +152,15 @@ namespace EntityPrivilegeCopy
             // solutionCmb
             // 
             this.solutionCmb.FormattingEnabled = true;
-            this.solutionCmb.Location = new System.Drawing.Point(13, 606);
+            this.solutionCmb.Location = new System.Drawing.Point(7, 29);
             this.solutionCmb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.solutionCmb.Name = "solutionCmb";
-            this.solutionCmb.Size = new System.Drawing.Size(655, 33);
+            this.solutionCmb.Size = new System.Drawing.Size(653, 33);
             this.solutionCmb.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 25);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Source Entity:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 133);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(165, 25);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Target Entity(s):";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 575);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(230, 25);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Security Role Solution:";
             // 
             // filterTargetEntityTxb
             // 
-            this.filterTargetEntityTxb.Location = new System.Drawing.Point(15, 172);
+            this.filterTargetEntityTxb.Location = new System.Drawing.Point(6, 30);
             this.filterTargetEntityTxb.Name = "filterTargetEntityTxb";
             this.filterTargetEntityTxb.Size = new System.Drawing.Size(483, 31);
             this.filterTargetEntityTxb.TabIndex = 14;
@@ -193,33 +170,60 @@ namespace EntityPrivilegeCopy
             // 
             this.privilegeTypeClb.CheckOnClick = true;
             this.privilegeTypeClb.FormattingEnabled = true;
-            this.privilegeTypeClb.Location = new System.Drawing.Point(13, 708);
+            this.privilegeTypeClb.Location = new System.Drawing.Point(6, 34);
             this.privilegeTypeClb.Name = "privilegeTypeClb";
             this.privilegeTypeClb.Size = new System.Drawing.Size(390, 228);
             this.privilegeTypeClb.TabIndex = 15;
             // 
-            // label4
+            // groupBox1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 659);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(211, 25);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Copy Privilege Type:";
+            this.groupBox1.Controls.Add(this.sourceEntityCmb);
+            this.groupBox1.Location = new System.Drawing.Point(11, 45);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(670, 70);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Source Entity:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.filterTargetEntityTxb);
+            this.groupBox2.Controls.Add(this.targetEntityListClb);
+            this.groupBox2.Location = new System.Drawing.Point(11, 121);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(666, 386);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Target Entity(s):";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.solutionCmb);
+            this.groupBox3.Location = new System.Drawing.Point(11, 513);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(664, 70);
+            this.groupBox3.TabIndex = 18;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Security Role Solution:";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.privilegeTypeClb);
+            this.groupBox4.Location = new System.Drawing.Point(11, 589);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(402, 268);
+            this.groupBox4.TabIndex = 18;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Copy Privilege Type:";
             // 
             // MyPluginControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.privilegeTypeClb);
-            this.Controls.Add(this.filterTargetEntityTxb);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.solutionCmb);
-            this.Controls.Add(this.sourceEntityCmb);
-            this.Controls.Add(this.targetEntityListClb);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStripMenu);
             this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.Name = "MyPluginControl";
@@ -227,6 +231,11 @@ namespace EntityPrivilegeCopy
             this.Load += new System.EventHandler(this.MyPluginControl_Load);
             this.toolStripMenu.ResumeLayout(false);
             this.toolStripMenu.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,16 +248,16 @@ namespace EntityPrivilegeCopy
         private System.Windows.Forms.CheckedListBox targetEntityListClb;
         private System.Windows.Forms.ComboBox sourceEntityCmb;
         private System.Windows.Forms.ComboBox solutionCmb;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox filterTargetEntityTxb;
         private System.Windows.Forms.CheckedListBox privilegeTypeClb;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripMenuItem loadAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadFromSolutionToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
