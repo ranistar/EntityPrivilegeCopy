@@ -48,6 +48,7 @@ namespace EntityPrivilegeCopy
         private EntityCollection Solutions;
         private List<ControlDataItemModel> TargetEntityDataList;
         private List<ControlDataItemModel> CheckedTargetEntutyList = new List<ControlDataItemModel>();
+        private DataTable ResultDataTable = new DataTable();
         public MyPluginControl()
         {
             InitializeComponent();
@@ -79,6 +80,7 @@ namespace EntityPrivilegeCopy
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter)
         {
             base.UpdateConnection(newService, detail, actionName, parameter);
+            // TODO common helper service update
         }
 
         #region Control Data Bind and Refresh
@@ -144,6 +146,8 @@ namespace EntityPrivilegeCopy
             SolutionCmbBind();
             TargetEntityClbBind();
             PrivilegeTypeClbBind();
+
+            this.resultGridView.Rows.Clear();
         }
 
         private void ExcuteBtn_Click(object sender, EventArgs e)
@@ -165,6 +169,7 @@ namespace EntityPrivilegeCopy
                     return;
                 }
                 Copy(sourceEntityData.LogicalName, targetEntityNames, rolesData, copyPrivilegeTypes, false);
+                this.resultGridView.Refresh();
             }
         }
 
@@ -185,12 +190,31 @@ namespace EntityPrivilegeCopy
             {
                 var addPrivileges = new List<RolePrivilege>();
                 var addPrivilegesRoleRequest = new AddPrivilegesRoleRequest { RoleId = role.Id };
+                var row = new DataGridViewRow();
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = role.GetAttributeValue<string>("name") });
+                row.Cells.Add(new DataGridViewTextBoxCell());
+                row.Cells.Add(new DataGridViewImageCell());
+                //row.Cells[2].Value = Image.FromFile($"../Debug/Resources/role_0.gif");
+                row.Cells.Add(new DataGridViewImageCell());
+                //row.Cells[3].Value = Image.FromFile($"../Debug/Resources/role_0.gif");
+                row.Cells.Add(new DataGridViewImageCell());
+                //row.Cells[4].Value = Image.FromFile($"../Debug/Resources/role_0.gif");
+                row.Cells.Add(new DataGridViewImageCell());
+                //row.Cells[5].Value = Image.FromFile($"../Debug/Resources/role_0.gif");
+                row.Cells.Add(new DataGridViewImageCell());
+                //row.Cells[6].Value = Image.FromFile($"../Debug/Resources/role_0.gif");
+                row.Cells.Add(new DataGridViewImageCell());
+                //row.Cells[7].Value = Image.FromFile($"../Debug/Resources/role_0.gif");
+                row.Cells.Add(new DataGridViewImageCell());
+                //row.Cells[8].Value = Image.FromFile($"../Debug/Resources/role_0.gif");
+                row.Cells.Add(new DataGridViewImageCell());
+                //row.Cells[9].Value = Image.FromFile($"../Debug/Resources/role_0.gif");
                 //get role privileges relationship for source entity
                 var sourceEntityRolePrivileges = commonHelper.GetRolePrivileges(role.Id, sourceEntityPrivilegeMetadatas.EntityMetadata.Privileges.Select(x => x.PrivilegeId).ToArray());
                 foreach (var sourceEntityRolePrivilege in sourceEntityRolePrivileges)
                 {
                     //privilege Type
-                    var privilegeMetadata = sourceEntityPrivilegeMetadatas.EntityMetadata.Privileges.Where(x => x.PrivilegeId == sourceEntityRolePrivilege.GetAttributeValue<Guid>("privilegeid")).FirstOrDefault() as SecurityPrivilegeMetadata;
+                    var privilegeMetadata = sourceEntityPrivilegeMetadatas.EntityMetadata.Privileges.Where(x => x.PrivilegeId == sourceEntityRolePrivilege.GetAttributeValue<Guid>("privilegeid")).FirstOrDefault();
                     var privilegeType = privilegeMetadata.PrivilegeType;
                     if (copyPrivilegeTypes.Contains(privilegeType.GetHashCode()))
                     {
@@ -199,6 +223,7 @@ namespace EntityPrivilegeCopy
                         var privilegeDepth = commonHelper.MappingPrivilegeMaskToPrivilegeDepth(privilegeMask);
                         foreach (var targetEntityPrivilegeMetadata in targetEntityPrivilegeMetadatas)
                         {
+                            
                             if (targetEntityPrivilegeMetadata.EntityMetadata.OwnershipType.Value == OwnershipTypes.OrganizationOwned)
                             {
                                 privilegeDepth = 3;
@@ -208,6 +233,22 @@ namespace EntityPrivilegeCopy
                                 var targetPrivilegeMetadata = targetEntityPrivilegeMetadata.EntityMetadata.Privileges.First(x => x.PrivilegeType == privilegeType);
                                 addPrivileges.Add(new RolePrivilege(privilegeDepth, targetPrivilegeMetadata.PrivilegeId));
                             }
+                            row.Cells[1].Value = targetEntityPrivilegeMetadata.EntityMetadata.LogicalName;
+
+                            var index = 0;
+                            if (privilegeType == PrivilegeType.Create) index = 2;
+                            if (privilegeType == PrivilegeType.Read) index = 3;
+                            if (privilegeType == PrivilegeType.Write) index = 4;
+                            if (privilegeType == PrivilegeType.Delete) index = 5;
+                            if (privilegeType == PrivilegeType.Append) index = 6;
+                            if (privilegeType == PrivilegeType.AppendTo) index = 7;
+                            if (privilegeType == PrivilegeType.Assign) index = 8;
+                            if (privilegeType == PrivilegeType.Share) index = 9;
+                            var icon = Image.FromFile($"../Debug/Resources/role_{privilegeDepth}.gif");
+                            row.Cells[index].Value = icon;
+
+                            var rows = this.resultGridView.Rows;
+                            rows.Contains(row);
                         }
                     }
                 }
@@ -221,9 +262,9 @@ namespace EntityPrivilegeCopy
             {
                 var response = Service.Execute(transactionRequest);
             }
+
         }
 
-        // TODO filter item in Target entity ListCheckBox
         private void FilterTargetEntityTxb_TextChanged(object sender, EventArgs e)
         {
             var txt = this.filterTargetEntityTxb.Text;
@@ -268,6 +309,20 @@ namespace EntityPrivilegeCopy
                     CheckedTargetEntutyList.Remove(selectedItem);
                 }
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            var clb = this.privilegeTypeClb;
+            for (int i = 0; i < clb.Items.Count; i++)
+            {
+                this.privilegeTypeClb.SetItemChecked(i, this.checkBox1.Checked);
+            }
+        }
+
+        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        {
+            // TODO show list button
         }
     }
 }

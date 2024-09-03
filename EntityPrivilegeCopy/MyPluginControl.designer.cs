@@ -46,11 +46,26 @@ namespace EntityPrivilegeCopy
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.resultGridView = new System.Windows.Forms.DataGridView();
+            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Entity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Create = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Read = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Write = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Append = new System.Windows.Forms.DataGridViewImageColumn();
+            this.AppendTo = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Assign = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Share = new System.Windows.Forms.DataGridViewImageColumn();
             this.toolStripMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.resultGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -64,8 +79,8 @@ namespace EntityPrivilegeCopy
             this.toolStripButton2});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
-            this.toolStripMenu.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStripMenu.Size = new System.Drawing.Size(951, 42);
+            this.toolStripMenu.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.toolStripMenu.Size = new System.Drawing.Size(1862, 42);
             this.toolStripMenu.TabIndex = 4;
             this.toolStripMenu.Text = "toolStrip1";
             // 
@@ -92,6 +107,7 @@ namespace EntityPrivilegeCopy
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
             this.toolStripSplitButton1.Size = new System.Drawing.Size(116, 36);
             this.toolStripSplitButton1.Text = "Load";
+            this.toolStripSplitButton1.ButtonClick += new System.EventHandler(this.toolStripSplitButton1_ButtonClick);
             // 
             // loadAllToolStripMenuItem
             // 
@@ -131,10 +147,10 @@ namespace EntityPrivilegeCopy
             // 
             this.targetEntityListClb.CheckOnClick = true;
             this.targetEntityListClb.FormattingEnabled = true;
-            this.targetEntityListClb.Location = new System.Drawing.Point(7, 69);
-            this.targetEntityListClb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.targetEntityListClb.Location = new System.Drawing.Point(8, 82);
+            this.targetEntityListClb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.targetEntityListClb.Name = "targetEntityListClb";
-            this.targetEntityListClb.Size = new System.Drawing.Size(653, 312);
+            this.targetEntityListClb.Size = new System.Drawing.Size(656, 256);
             this.targetEntityListClb.TabIndex = 7;
             this.targetEntityListClb.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.TargetEntityListClb_ItemCheck);
             // 
@@ -143,26 +159,27 @@ namespace EntityPrivilegeCopy
             this.sourceEntityCmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.sourceEntityCmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.sourceEntityCmb.FormattingEnabled = true;
-            this.sourceEntityCmb.Location = new System.Drawing.Point(7, 29);
-            this.sourceEntityCmb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sourceEntityCmb.Location = new System.Drawing.Point(8, 30);
+            this.sourceEntityCmb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.sourceEntityCmb.Name = "sourceEntityCmb";
-            this.sourceEntityCmb.Size = new System.Drawing.Size(655, 33);
+            this.sourceEntityCmb.Size = new System.Drawing.Size(656, 33);
             this.sourceEntityCmb.TabIndex = 9;
             // 
             // solutionCmb
             // 
             this.solutionCmb.FormattingEnabled = true;
-            this.solutionCmb.Location = new System.Drawing.Point(7, 29);
-            this.solutionCmb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.solutionCmb.Location = new System.Drawing.Point(8, 30);
+            this.solutionCmb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.solutionCmb.Name = "solutionCmb";
-            this.solutionCmb.Size = new System.Drawing.Size(653, 33);
+            this.solutionCmb.Size = new System.Drawing.Size(656, 33);
             this.solutionCmb.TabIndex = 11;
             // 
             // filterTargetEntityTxb
             // 
-            this.filterTargetEntityTxb.Location = new System.Drawing.Point(6, 30);
+            this.filterTargetEntityTxb.Location = new System.Drawing.Point(8, 32);
+            this.filterTargetEntityTxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.filterTargetEntityTxb.Name = "filterTargetEntityTxb";
-            this.filterTargetEntityTxb.Size = new System.Drawing.Size(483, 31);
+            this.filterTargetEntityTxb.Size = new System.Drawing.Size(656, 31);
             this.filterTargetEntityTxb.TabIndex = 14;
             this.filterTargetEntityTxb.TextChanged += new System.EventHandler(this.FilterTargetEntityTxb_TextChanged);
             // 
@@ -170,17 +187,20 @@ namespace EntityPrivilegeCopy
             // 
             this.privilegeTypeClb.CheckOnClick = true;
             this.privilegeTypeClb.FormattingEnabled = true;
-            this.privilegeTypeClb.Location = new System.Drawing.Point(6, 34);
+            this.privilegeTypeClb.Location = new System.Drawing.Point(8, 72);
+            this.privilegeTypeClb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.privilegeTypeClb.Name = "privilegeTypeClb";
-            this.privilegeTypeClb.Size = new System.Drawing.Size(390, 228);
+            this.privilegeTypeClb.Size = new System.Drawing.Size(656, 172);
             this.privilegeTypeClb.TabIndex = 15;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.sourceEntityCmb);
-            this.groupBox1.Location = new System.Drawing.Point(11, 45);
+            this.groupBox1.Location = new System.Drawing.Point(12, 58);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(670, 70);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox1.Size = new System.Drawing.Size(676, 80);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Source Entity:";
@@ -189,9 +209,11 @@ namespace EntityPrivilegeCopy
             // 
             this.groupBox2.Controls.Add(this.filterTargetEntityTxb);
             this.groupBox2.Controls.Add(this.targetEntityListClb);
-            this.groupBox2.Location = new System.Drawing.Point(11, 121);
+            this.groupBox2.Location = new System.Drawing.Point(12, 146);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(666, 386);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox2.Size = new System.Drawing.Size(676, 372);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Target Entity(s):";
@@ -199,9 +221,11 @@ namespace EntityPrivilegeCopy
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.solutionCmb);
-            this.groupBox3.Location = new System.Drawing.Point(11, 513);
+            this.groupBox3.Location = new System.Drawing.Point(12, 526);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(664, 70);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox3.Size = new System.Drawing.Size(676, 80);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Security Role Solution:";
@@ -209,25 +233,186 @@ namespace EntityPrivilegeCopy
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.privilegeTypeClb);
-            this.groupBox4.Location = new System.Drawing.Point(11, 589);
+            this.groupBox4.Controls.Add(this.checkBox1);
+            this.groupBox4.Location = new System.Drawing.Point(12, 614);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(402, 268);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox4.Size = new System.Drawing.Size(676, 272);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Copy Privilege Type:";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(434, 30);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(224, 29);
+            this.checkBox1.TabIndex = 20;
+            this.checkBox1.Text = "Select/Unselect All";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.resultGridView);
+            this.groupBox5.Location = new System.Drawing.Point(696, 58);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Size = new System.Drawing.Size(1155, 828);
+            this.groupBox5.TabIndex = 19;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Result";
+            // 
+            // resultGridView
+            // 
+            this.resultGridView.AllowUserToAddRows = false;
+            this.resultGridView.AllowUserToDeleteRows = false;
+            this.resultGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resultGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Role,
+            this.Entity,
+            this.Create,
+            this.Read,
+            this.Write,
+            this.Delete,
+            this.Append,
+            this.AppendTo,
+            this.Assign,
+            this.Share});
+            this.resultGridView.Location = new System.Drawing.Point(8, 32);
+            this.resultGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.resultGridView.MultiSelect = false;
+            this.resultGridView.Name = "resultGridView";
+            this.resultGridView.ReadOnly = true;
+            this.resultGridView.RowHeadersVisible = false;
+            this.resultGridView.RowHeadersWidth = 82;
+            this.resultGridView.RowTemplate.Height = 33;
+            this.resultGridView.Size = new System.Drawing.Size(1145, 784);
+            this.resultGridView.TabIndex = 0;
+            // 
+            // Role
+            // 
+            this.Role.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Role.HeaderText = "Role";
+            this.Role.MinimumWidth = 10;
+            this.Role.Name = "Role";
+            this.Role.ReadOnly = true;
+            this.Role.Width = 101;
+            // 
+            // Entity
+            // 
+            this.Entity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Entity.HeaderText = "Entity";
+            this.Entity.MinimumWidth = 10;
+            this.Entity.Name = "Entity";
+            this.Entity.ReadOnly = true;
+            this.Entity.Width = 111;
+            // 
+            // Create
+            // 
+            this.Create.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Create.HeaderText = "Create";
+            this.Create.MinimumWidth = 20;
+            this.Create.Name = "Create";
+            this.Create.ReadOnly = true;
+            this.Create.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Create.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Create.Width = 121;
+            // 
+            // Read
+            // 
+            this.Read.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Read.HeaderText = "Read";
+            this.Read.MinimumWidth = 20;
+            this.Read.Name = "Read";
+            this.Read.ReadOnly = true;
+            this.Read.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Read.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Read.Width = 108;
+            // 
+            // Write
+            // 
+            this.Write.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Write.HeaderText = "Write";
+            this.Write.MinimumWidth = 20;
+            this.Write.Name = "Write";
+            this.Write.ReadOnly = true;
+            this.Write.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Write.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Write.Width = 107;
+            // 
+            // Delete
+            // 
+            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 20;
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Delete.Width = 119;
+            // 
+            // Append
+            // 
+            this.Append.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Append.HeaderText = "Append";
+            this.Append.MinimumWidth = 20;
+            this.Append.Name = "Append";
+            this.Append.ReadOnly = true;
+            this.Append.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Append.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Append.Width = 131;
+            // 
+            // AppendTo
+            // 
+            this.AppendTo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.AppendTo.HeaderText = "Append To";
+            this.AppendTo.MinimumWidth = 20;
+            this.AppendTo.Name = "AppendTo";
+            this.AppendTo.ReadOnly = true;
+            this.AppendTo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.AppendTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.AppendTo.Width = 162;
+            // 
+            // Assign
+            // 
+            this.Assign.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Assign.HeaderText = "Assign";
+            this.Assign.MinimumWidth = 20;
+            this.Assign.Name = "Assign";
+            this.Assign.ReadOnly = true;
+            this.Assign.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Assign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Assign.Width = 122;
+            // 
+            // Share
+            // 
+            this.Share.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Share.HeaderText = "Share";
+            this.Share.MinimumWidth = 20;
+            this.Share.Name = "Share";
+            this.Share.ReadOnly = true;
+            this.Share.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Share.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Share.Width = 114;
+            // 
             // MyPluginControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStripMenu);
-            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.Name = "MyPluginControl";
-            this.Size = new System.Drawing.Size(951, 1076);
+            this.Size = new System.Drawing.Size(1862, 898);
             this.Load += new System.EventHandler(this.MyPluginControl_Load);
             this.toolStripMenu.ResumeLayout(false);
             this.toolStripMenu.PerformLayout();
@@ -236,6 +421,9 @@ namespace EntityPrivilegeCopy
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.resultGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,5 +447,18 @@ namespace EntityPrivilegeCopy
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.DataGridView resultGridView;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Role;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Entity;
+        private System.Windows.Forms.DataGridViewImageColumn Create;
+        private System.Windows.Forms.DataGridViewImageColumn Read;
+        private System.Windows.Forms.DataGridViewImageColumn Write;
+        private System.Windows.Forms.DataGridViewImageColumn Delete;
+        private System.Windows.Forms.DataGridViewImageColumn Append;
+        private System.Windows.Forms.DataGridViewImageColumn AppendTo;
+        private System.Windows.Forms.DataGridViewImageColumn Assign;
+        private System.Windows.Forms.DataGridViewImageColumn Share;
     }
 }
